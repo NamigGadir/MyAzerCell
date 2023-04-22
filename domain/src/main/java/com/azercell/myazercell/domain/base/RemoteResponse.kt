@@ -1,4 +1,4 @@
-package com.azercell.myazercell.domain.entity
+package com.azercell.myazercell.domain.base
 
 import java.lang.Exception
 

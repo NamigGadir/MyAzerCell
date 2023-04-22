@@ -23,4 +23,6 @@ dependencies {
 
     testImplementation(AppDependencies.testLibraries)
 
+    implementation(AppDependencies.libphonenumber)
+
 }

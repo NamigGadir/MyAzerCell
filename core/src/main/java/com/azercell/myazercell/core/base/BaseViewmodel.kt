@@ -3,8 +3,8 @@ package com.azercell.myazercell.core.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.azercell.myazercell.core.base.models.ErrorModel
-import com.azercell.myazercell.domain.entity.RemoteResponse
-import com.azercell.myazercell.domain.usecase.base.BaseUseCase
+import com.azercell.myazercell.domain.base.RemoteResponse
+import com.azercell.myazercell.domain.base.BaseUseCase
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel

@@ -45,6 +45,9 @@ object AppDependencies {
     //Coil
     const val coil = "io.coil-kt:coil:${ApplicationVersions.coilVersion}"
 
+    //Phonenumber
+    const val libphonenumber = "com.googlecode.libphonenumber:libphonenumber:8.12.42"
+
     val appLibraries = arrayListOf<String>().apply {
         add(appCompat)
         add(androidCore)

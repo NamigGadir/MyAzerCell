@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="register_button_title">Register</string>
+    <string name="registration_enter_name">Enter Name</string>
+    <string name="registration_enter_surname">Enter Surname</string>
+    <string name="registration_your_birth_date">Your Birth Date</string>
+    <string name="registration_your_phone_number">Your Phone number</string>
+    <string name="registration_select_birth_date">Select date of birth</string>
 </resources>

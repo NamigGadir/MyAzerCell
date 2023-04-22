@@ -3,5 +3,5 @@
     <color name="pureblack">#000000</color>
     <color name="color_blue_button">#0055E7</color>
     <color name="white">#FFFFFF</color>
-    <color name="dark_gray_text">#6B7280</color>
+    <color name="light_gray_text">#A8A8A8</color>
 </resources>

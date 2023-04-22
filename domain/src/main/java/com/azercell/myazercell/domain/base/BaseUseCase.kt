@@ -1,4 +1,4 @@
-package com.azercell.myazercell.domain.usecase.base
+package com.azercell.myazercell.domain.base
 
 interface BaseUseCase<T, R> {
 
