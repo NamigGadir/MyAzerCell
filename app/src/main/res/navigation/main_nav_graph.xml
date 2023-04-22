@@ -9,5 +9,10 @@
 
     <include app:graph="@navigation/auth_nav_graph" />
 
+    <include app:graph="@navigation/transfers_nav_graph" />
+
+    <include app:graph="@navigation/others_nav_graph" />
+
+
 
 </navigation>

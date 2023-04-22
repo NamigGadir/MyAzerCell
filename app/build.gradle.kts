@@ -60,6 +60,8 @@ dependencies {
     implementation(project(ApplicationModules.dataModule))
     implementation(project(ApplicationModules.homeModule))
     implementation(project(ApplicationModules.authModule))
+    implementation(project(ApplicationModules.transfersModule))
+    implementation(project(ApplicationModules.othersModule))
 
     implementation(AppDependencies.androidCore)
     implementation(AppDependencies.appCompat)
