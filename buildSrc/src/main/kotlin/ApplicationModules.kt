@@ -5,6 +5,7 @@ object ApplicationModules {
     const val domainModule = ":domain"
     const val dataModule = ":data"
     const val homeModule = ":features:home"
+    const val authModule = ":features:auth"
     const val uiToolkit = ":ui-toolkit"
 
 }

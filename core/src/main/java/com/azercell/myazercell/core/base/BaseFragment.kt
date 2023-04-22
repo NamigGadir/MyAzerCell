@@ -30,6 +30,10 @@ abstract class BaseFragment<ViewModel : BaseViewModel<State, Effect, Event>, VB 
 
     open fun onEffectUpdate(effect: Effect) {}
 
+    protected fun postEvent(producer: () -> Event) {
+        viewmodel.postEvent(producer.invoke())
+    }
+
     private fun initViewModel() {
         viewmodel = ViewModelProvider(getViewModelScope() ?: requireActivity())[getViewModelClass()]
     }

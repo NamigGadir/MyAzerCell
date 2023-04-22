@@ -59,6 +59,7 @@ dependencies {
     implementation(project(ApplicationModules.domainModule))
     implementation(project(ApplicationModules.dataModule))
     implementation(project(ApplicationModules.homeModule))
+    implementation(project(ApplicationModules.authModule))
 
     implementation(AppDependencies.androidCore)
     implementation(AppDependencies.appCompat)
