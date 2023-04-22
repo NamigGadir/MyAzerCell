@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorGrey">#dddddd</color>
+    <color name="yellow">#FFBF00</color>
+    <color name="colorDivider">#FFFFFF</color>
+    <color name="greenButtonColor">#27AC03</color>
+</resources>
