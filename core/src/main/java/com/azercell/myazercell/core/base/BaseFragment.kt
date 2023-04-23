@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.viewbinding.ViewBinding
 import com.azercell.myazercell.core.base.models.ErrorModel
 import kotlinx.coroutines.flow.launchIn
@@ -53,6 +56,9 @@ abstract class BaseFragment<ViewModel : BaseViewModel<State, Effect, Event>, VB 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = onViewBinding(inflater, container, false)
+        binding.root.findViewWithTag<Toolbar>("toolbar")?.let {
+            NavigationUI.setupWithNavController(it, findNavController())
+        }
         return binding.root
     }
 
