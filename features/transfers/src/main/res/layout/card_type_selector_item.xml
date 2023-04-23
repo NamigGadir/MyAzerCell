@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/shapeableImageView"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:background="@color/card_view_background"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/circularImageViewDouble" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/card_number"
+        style="@style/Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/pureblack"
+        app:layout_constraintEnd_toStartOf="@+id/card_balance"
+        app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
+        app:layout_constraintTop_toTopOf="@+id/shapeableImageView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/card_holder"
+        style="@style/Body_small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/light_gray_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/card_balance"
+        app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
+        app:layout_constraintTop_toBottomOf="@+id/card_number" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/card_balance"
+        style="@style/Subtitle_H1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/pureblack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

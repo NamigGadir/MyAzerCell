@@ -5,6 +5,7 @@ import com.azercell.myazercell.domain.entity.remote.auth.RegisterRequest
 import com.azercell.myazercell.domain.entity.remote.auth.RegisterResponse
 import com.azercell.myazercell.domain.entity.remote.home.Card
 import com.azercell.myazercell.domain.entity.remote.home.CardOrderRequest
+import com.azercell.myazercell.domain.entity.remote.transfer.MakeTransferRequest
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -56,6 +57,16 @@ object UserDataController {
                 cardCurrency = cardOrderRequest.cardCurrency
             )
             userCards.add(card)
+        } else
+            throw IllegalAccessException()
+    }
+
+    fun makeTransfer(authToken: String, makeTransferRequest: MakeTransferRequest) {
+        if (authToken == currentToken) {
+            makeTransferRequest.apply {
+                from.cardBalance -= amount
+                to.cardBalance += amount
+            }
         } else
             throw IllegalAccessException()
     }

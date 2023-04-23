@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.viewbinding.ViewBinding
 import com.azercell.myazercell.core.base.models.ErrorModel
@@ -57,7 +58,7 @@ abstract class BaseFragment<ViewModel : BaseViewModel<State, Effect, Event>, VB 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = onViewBinding(inflater, container, false)
         binding.root.findViewWithTag<Toolbar>("toolbar")?.let {
-            NavigationUI.setupWithNavController(it, findNavController())
+            (requireActivity() as SessionHandler).onToolbarChange(it)
         }
         return binding.root
     }

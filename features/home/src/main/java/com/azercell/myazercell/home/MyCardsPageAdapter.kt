@@ -44,7 +44,7 @@ class CardViewHolder(private val binding: CardsItemBinding) : RecyclerView.ViewH
 
     fun bind(card: Card) {
         binding.apply {
-            cardBalance.text = "${card.cardBalance} ${card.cardCurrency}"
+            cardBalance.text = binding.root.context.getString(com.azercell.myazercell.ui_toolkit.R.string.card_balance, card.cardBalance, card.cardCurrency)
             cardNetworkType.setImageResource(
                 when (card.cardNetwork) {
                     CardNetwork.VISA -> com.azercell.myazercell.ui_toolkit.R.drawable.ic_visa_logo
@@ -52,7 +52,7 @@ class CardViewHolder(private val binding: CardsItemBinding) : RecyclerView.ViewH
                 }
             )
             cardHolderName.text = card.cardHolderName
-            cardPan.text = card.cardNumber.maskCardNumber("**** **** **** ####")
+            cardPan.text = card.cardNumber.maskCardNumber()
             cardExpireDate.text = card.expireDate
         }
     }

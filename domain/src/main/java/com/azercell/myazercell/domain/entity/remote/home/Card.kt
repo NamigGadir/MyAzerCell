@@ -7,7 +7,7 @@ data class Card(
     val cardNumber: String,
     val expireDate: String,
     val cardNetwork: CardNetwork,
-    val cardBalance: Double = 10.0,
+    var cardBalance: Double = 10.0,
     val cardHolderName: String? = "Namig",
     val cardCurrency: String = "AZN",
 )

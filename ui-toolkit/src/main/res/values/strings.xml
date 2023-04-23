@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="card_balance">%1$.2f %2$s </string>
+</resources>

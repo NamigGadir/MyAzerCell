@@ -1,4 +1,11 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transfer_toolbar_title">Transfer my balance</string>
+    <string name="select_card">Select Card</string>
+    <string name="from_transfer">From</string>
+    <string name="to_transfer">To</string>
+    <string name="transfer">Transfer</string>
+    <string name="transfer_amount">Transfer Amount</string>
+    <string name="transfer_was_successful">Transfer Was Success</string>
 </resources>

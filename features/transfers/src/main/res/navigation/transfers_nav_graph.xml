@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/transfersFragment"
         android:name="com.azercell.myazercell.transfers.TransfersFragment"
-        android:label="fragment_transfers"
+        android:label="@string/transfer_toolbar_title"
         tools:layout="@layout/fragment_transfers" />
 </navigation>

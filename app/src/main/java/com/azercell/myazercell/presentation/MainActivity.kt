@@ -1,11 +1,14 @@
 package com.azercell.myazercell.presentation
 
 import android.view.LayoutInflater
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.azercell.myazercell.R
 import com.azercell.myazercell.core.base.BaseActivity
@@ -24,6 +27,16 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding, MainContra
         setOf(
             com.azercell.myazercell.auth.R.id.registrationFragment
         )
+    }
+
+    private val config: AppBarConfiguration by lazy {
+        AppBarConfiguration.Builder(
+            setOf(
+                com.azercell.myazercell.home.R.id.homeFragment,
+                com.azercell.myazercell.transfers.R.id.transfersFragment,
+                com.azercell.myazercell.others.R.id.othersFragment,
+            )
+        ).build()
     }
 
     override val onViewBinding: () -> ActivityMainBinding
@@ -56,6 +69,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding, MainContra
         val navBuilder = NavOptions.Builder()
         val navOptions: NavOptions = navBuilder.setPopUpTo(R.id.main_nav_graph, false).build()
         findNavController(R.id.main_nav_fragment).navigate(com.azercell.myazercell.home.R.id.home_nav_graph, bundleOf(AUTH_TOKEN_BUNDLE to authToken), navOptions)
+    }
+
+    override fun onToolbarChange(toolbar: Toolbar) {
+        NavigationUI.setupWithNavController(toolbar, navController, config)
     }
 
     companion object {
