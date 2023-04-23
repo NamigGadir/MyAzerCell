@@ -10,6 +10,6 @@
         android:title="@string/menu_title_transfers" />
     <item
         android:id="@+id/others_nav_graph"
-        android:icon="@drawable/ic_home_page_menu"
+        android:icon="@drawable/ic_others_menu"
         android:title="@string/menu_title_others" />
 </menu>

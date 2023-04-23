@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".order_card.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -59,7 +59,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/register_button"
+        android:id="@+id/order_new_card_button"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_margin="24dp"

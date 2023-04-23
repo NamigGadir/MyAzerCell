@@ -1,5 +1,7 @@
 package com.azercell.myazercell.core.extensions
 
+import java.util.*
+
 fun String.maskCardNumber(mask: String): String? {
     var index = 0
     val maskedNumber = StringBuilder()

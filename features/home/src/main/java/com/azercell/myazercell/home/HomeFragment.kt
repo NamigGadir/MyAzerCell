@@ -2,6 +2,7 @@ package com.azercell.myazercell.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.azercell.myazercell.core.base.BaseFragment
 import com.azercell.myazercell.core.extensions.setupCardTransformer
@@ -18,20 +19,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeContra
 
     override val onViewInit: FragmentHomeBinding.() -> Unit = {
         cardsPager.adapter = cardAdapter
-        cardsPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            }
-
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-            }
-        })
-       cardsPager.setupCardTransformer()
+        cardsPager.setupCardTransformer()
+        orderNewCardButton.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOrderCardFragment())
+        }
     }
 
     override fun onStateUpdate(state: HomeContract.HomeState) {
