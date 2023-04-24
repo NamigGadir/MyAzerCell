@@ -6,9 +6,7 @@ interface SessionHandler {
 
     fun onRegister(authToken: String)
 
-    fun onLogout() {
-
-    }
+    fun onLogout()
 
     fun onToolbarChange(toolbar: Toolbar)
 }

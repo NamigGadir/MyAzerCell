@@ -5,6 +5,7 @@ import com.azercell.myazercell.core.base.UIEffect
 import com.azercell.myazercell.core.base.UIEvent
 import com.azercell.myazercell.core.base.UIState
 import com.azercell.myazercell.core.util.SessionManager
+import com.azercell.myazercell.domain.entity.enum.CardCurrency
 import com.azercell.myazercell.domain.entity.enum.CardNetwork
 import com.azercell.myazercell.domain.entity.remote.auth.RegisterRequest
 import com.azercell.myazercell.domain.entity.remote.home.CardOrderRequest
@@ -19,12 +20,6 @@ class OrderCardViewModel @Inject constructor(
     private val orderCardUseCase: OrderCardUseCase
 ) : BaseViewModel<OrderCardContract.OrderCardState, OrderCardContract.OrderCardEffect, OrderCardContract.OrderCardEvent>() {
 
-    companion object {
-        private const val CUR_AZN = "AZN"
-        private const val CUR_EUR = "EUR"
-        private const val CUR_USD = "USD"
-    }
-
     init {
         getCurrentUserInfoUseCase.invokeRequest(SessionManager.currentToken) {
             val cartTypes = CardNetwork.values().map { it.name }
@@ -32,7 +27,7 @@ class OrderCardViewModel @Inject constructor(
                 copy(
                     userInfo = it,
                     cardNetworks = cartTypes,
-                    cardCurrencies = listOf(CUR_AZN, CUR_USD, CUR_EUR)
+                    cardCurrencies = CardCurrency.values().map { it.name }
                 )
             }
         }
@@ -56,7 +51,7 @@ class OrderCardViewModel @Inject constructor(
         state.value.cardNetworks?.let {
             val cardNetwork = CardNetwork.valueOf(it[event.selectedCardNetworkPosition])
             val cardHolderName = event.cardHolderName
-            val cardCurrency = event.selectedCardCurrency
+            val cardCurrency = CardCurrency.valueOf(event.selectedCardCurrency)
             orderCardUseCase.invokeRequest(
                 OrderCardUseCase.Params(
                     SessionManager.currentToken, CardOrderRequest(

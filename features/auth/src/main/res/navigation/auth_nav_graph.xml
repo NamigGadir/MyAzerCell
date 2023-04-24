@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.azercell.myazercell.auth.registration.RegistrationFragment"
-        android:label="RegistrationFragment" />
+        android:label="Register to MyAzerCell" />
 </navigation>

@@ -8,8 +8,11 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.findNavController
 import com.azercell.myazercell.core.base.BaseFragment
 import com.azercell.myazercell.core.extensions.toast
+import com.azercell.myazercell.domain.entity.remote.home.Card
 import com.azercell.myazercell.transfers.databinding.FragmentTransfersBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TransfersFragment : BaseFragment<TransfersViewModel, FragmentTransfersBinding, TransfersContract.TransfersState, TransfersContract.TransfersEffect, TransfersContract.TransfersEvent>(),
     AdapterView.OnItemSelectedListener {
 
@@ -36,12 +39,12 @@ class TransfersFragment : BaseFragment<TransfersViewModel, FragmentTransfersBind
     }
 
     override fun onStateUpdate(state: TransfersContract.TransfersState) {
+        val list = arrayListOf<Card?>()
         state.cardsList?.let {
-            val adapter = CardListAdapter(requireContext(), it)
+            list.add(null)
+            list.addAll(state.cardsList)
+            val adapter = CardListAdapter(requireContext(), list)
             binding.fromCard.adapter = adapter
-        }
-        state.cardsList?.let {
-            val adapter = CardListAdapter(requireContext(), it)
             binding.toCard.adapter = adapter
         }
     }

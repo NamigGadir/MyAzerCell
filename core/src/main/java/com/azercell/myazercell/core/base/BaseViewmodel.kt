@@ -33,6 +33,9 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
     private val _errorHandler = Channel<ErrorModel>()
     val errorHandler = _errorHandler.receiveAsFlow()
 
+    private val _handleProgressBar = MutableStateFlow(false)
+    val handleProgressBar: StateFlow<Boolean> = _handleProgressBar
+
     val handler by lazy {
         CoroutineExceptionHandler { _, exception ->
             handleError(exception, 0)
@@ -81,10 +84,12 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
         params: T,
         onStart: (() -> Unit)? = null,
         onFinish: (() -> Unit)? = null,
+        onHandleLoading: (Boolean) -> Unit = ::showLoading,
         onError: ((exception: Exception, errorCode: Int) -> Unit)? = null,
         onSuccess: ((result: R) -> Unit)? = null,
     ) {
         viewModelScope.launch(handler) {
+            onHandleLoading(true)
             onStart?.invoke()
             when (val callResult = this@invokeRequest.invoke(params)) {
                 is RemoteResponse.Success -> onSuccess?.let {
@@ -96,6 +101,7 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
                     } ?: handleError(callResult.exception, callResult.errorCode)
             }
             onFinish?.invoke()
+            onHandleLoading(false)
         }
     }
 
@@ -112,6 +118,12 @@ abstract class BaseViewModel<State : UIState, Effect : UIEffect, Event : UIEvent
     fun launch(block: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch(handler) {
             block()
+        }
+    }
+
+    private fun showLoading(isShowing: Boolean) {
+        viewModelScope.launch {
+            _handleProgressBar.emit(isShowing)
         }
     }
 }

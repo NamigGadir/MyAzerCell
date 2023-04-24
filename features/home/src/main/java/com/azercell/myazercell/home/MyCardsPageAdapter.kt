@@ -9,17 +9,17 @@ import com.azercell.myazercell.domain.entity.remote.home.Card
 import com.azercell.myazercell.home.databinding.CardsItemBinding
 import com.azercell.myazercell.ui_toolkit.base.BaseAdapter
 
-class MyCardsPageAdapter : BaseAdapter<Card, CardViewHolder>(
+class MyCardsPageAdapter constructor(private val onCardDelete: (Long) -> Unit) : BaseAdapter<Card, MyCardsPageAdapter.CardViewHolder>(
     areItemsTheSame = { oldItem, newItem ->
         oldItem.id == newItem.id
     },
     areContentsTheSame = { oldItem, newItem ->
-        oldItem.equals(newItem)
+        oldItem == newItem
     }
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        return CardViewHolder(CardsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return CardViewHolder(CardsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), onCardDelete)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -38,23 +38,23 @@ class MyCardsPageAdapter : BaseAdapter<Card, CardViewHolder>(
         return currentList[position].id
     }
 
-}
-
-class CardViewHolder(private val binding: CardsItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(card: Card) {
-        binding.apply {
-            cardBalance.text = binding.root.context.getString(com.azercell.myazercell.ui_toolkit.R.string.card_balance, card.cardBalance, card.cardCurrency)
-            cardNetworkType.setImageResource(
-                when (card.cardNetwork) {
-                    CardNetwork.VISA -> com.azercell.myazercell.ui_toolkit.R.drawable.ic_visa_logo
-                    CardNetwork.MC -> com.azercell.myazercell.ui_toolkit.R.drawable.ic_mastercard_logo
+    class CardViewHolder(private val binding: CardsItemBinding, private val onCardDelete: (Long) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(card: Card) {
+            binding.apply {
+                cardBalance.text = binding.root.context.getString(com.azercell.myazercell.ui_toolkit.R.string.card_balance, card.cardBalance, card.cardCurrency)
+                cardNetworkType.setImageResource(
+                    when (card.cardNetwork) {
+                        CardNetwork.VISA -> com.azercell.myazercell.ui_toolkit.R.drawable.ic_visa_logo
+                        CardNetwork.MC -> com.azercell.myazercell.ui_toolkit.R.drawable.ic_mastercard_logo
+                    }
+                )
+                cardHolderName.text = card.cardHolderName
+                cardPan.text = card.cardNumber.maskCardNumber()
+                cardExpireDate.text = card.expireDate
+                removeCard.setOnClickListener {
+                    onCardDelete(card.id)
                 }
-            )
-            cardHolderName.text = card.cardHolderName
-            cardPan.text = card.cardNumber.maskCardNumber()
-            cardExpireDate.text = card.expireDate
+            }
         }
     }
-
 }

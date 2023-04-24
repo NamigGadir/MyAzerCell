@@ -8,4 +8,7 @@ interface AuthRepository {
     suspend fun registerUser(registerRequest: RegisterRequest): RegisterResponse
 
     suspend fun getCurrentUser(authToken: String): RegisterRequest?
+
+    suspend fun logout(authToken: String)
+
 }

@@ -1,6 +1,5 @@
 package com.azercell.myazercell.data.util
 
-import com.azercell.myazercell.domain.entity.enum.CardNetwork
 import com.azercell.myazercell.domain.entity.remote.auth.RegisterRequest
 import com.azercell.myazercell.domain.entity.remote.auth.RegisterResponse
 import com.azercell.myazercell.domain.entity.remote.home.Card
@@ -12,16 +11,9 @@ import java.util.*
 object UserDataController {
     private const val DATE_FORMAT: String = "mm/yy"
     private val cardNumberChars = "1234567890"
-    private var registeredUser: RegisterRequest? = RegisterRequest(
-        "Namig", "Gadirov", "33/333/333", "994504592346"
-    )
-    private var currentToken: String = ""
-    private val userCards: ArrayList<Card> = arrayListOf(
-        Card(1, "1234567890123456", "13/12", CardNetwork.MC),
-        Card(2, "3456789012345678", "22/12", CardNetwork.VISA),
-        Card(3, "2345678901234567", "13/44", CardNetwork.VISA),
-        Card(4, "0987654789876546", "33/12", CardNetwork.MC)
-    )
+    private var registeredUser: RegisterRequest? = null
+    private var currentToken: String? = ""
+    private val userCards: ArrayList<Card> = arrayListOf()
 
     fun startRegistration(registerRequest: RegisterRequest): RegisterResponse {
         UUID.randomUUID().toString().also { token ->
@@ -45,6 +37,13 @@ object UserDataController {
             throw IllegalAccessException()
     }
 
+    fun getCardById(authToken: String, cardId: Long): Card {
+        if (authToken == currentToken) {
+            return userCards.first { it.id == cardId }
+        } else
+            throw IllegalAccessException()
+    }
+
     fun orderCard(authToken: String, cardOrderRequest: CardOrderRequest) {
         if (authToken == currentToken) {
             val card = Card(
@@ -54,7 +53,7 @@ object UserDataController {
                 cardNetwork = cardOrderRequest.cardType,
                 cardBalance = 10.0,
                 cardHolderName = cardOrderRequest.cardHolderName,
-                cardCurrency = cardOrderRequest.cardCurrency
+                cardCurrency = cardOrderRequest.cardCurrency.name
             )
             userCards.add(card)
         } else
@@ -67,6 +66,23 @@ object UserDataController {
                 from.cardBalance -= amount
                 to.cardBalance += amount
             }
+        } else
+            throw IllegalAccessException()
+    }
+
+    fun logout(authToken: String) {
+        if (authToken == currentToken) {
+            currentToken = null
+            userCards.clear()
+            registeredUser = null
+        } else
+            throw IllegalAccessException()
+    }
+
+    fun removeCard(authToken: String, cardId: Long) {
+        if (authToken == currentToken) {
+            val index = userCards.indexOfFirst { it.id == cardId }
+            userCards.removeAt(index)
         } else
             throw IllegalAccessException()
     }

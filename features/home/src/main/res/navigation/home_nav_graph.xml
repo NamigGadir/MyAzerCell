@@ -14,12 +14,23 @@
         <action
             android:id="@+id/action_homeFragment_to_orderCardFragment"
             app:destination="@id/orderCardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_removeCardFragment"
+            app:destination="@id/removeCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderCardFragment"
         android:name="com.azercell.myazercell.home.order_card.OrderCardFragment"
         android:label="@string/order_new_card"
         tools:layout="@layout/fragment_order_card" />
+    <fragment
+        android:id="@+id/removeCardFragment"
+        android:name="com.azercell.myazercell.home.remove_card.RemoveCardFragment"
+        android:label="@string/remove_card_toolbar_title" >
+        <argument
+            android:name="cardId"
+            app:argType="long" />
+    </fragment>
 
 
 </navigation>

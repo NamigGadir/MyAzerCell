@@ -26,6 +26,8 @@ abstract class BaseFragment<ViewModel : BaseViewModel<State, Effect, Event>, VB 
 
     lateinit var binding: VB
 
+    private val progressDialog: CustomProgressDialog by lazy { CustomProgressDialog(requireContext()) }
+
     protected abstract fun getViewModelClass(): Class<ViewModel>
     protected open fun getViewModelScope(): ViewModelStoreOwner? = null
 
@@ -85,13 +87,35 @@ abstract class BaseFragment<ViewModel : BaseViewModel<State, Effect, Event>, VB 
             .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach { error -> handleError(error) }
             .launchIn(lifecycleScope)
+        viewmodel.handleProgressBar
+            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach { isShowing ->
+                if (isShowing)
+                    showProgressBar()
+                else
+                    hideProgressBar()
+            }
+            .launchIn(lifecycleScope)
     }
 
-    open fun handleError(error: ErrorModel) {}
+    open fun handleError(error: ErrorModel) {
+        baseErrorDialog {
+            errorModel = error
+        }.show(parentFragmentManager, BaseErrorDialog::class.java.canonicalName)
+    }
 
     inline fun <R> withBinding(block: VB.() -> R): R {
         return binding.block()
     }
+
+    private fun hideProgressBar() {
+        progressDialog.dismiss()
+    }
+
+    private fun showProgressBar() {
+        progressDialog.show()
+    }
+
 
 
 }

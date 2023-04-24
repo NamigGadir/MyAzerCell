@@ -10,15 +10,15 @@ import com.azercell.myazercell.domain.entity.remote.home.Card
 import com.azercell.myazercell.transfers.databinding.CardSelectorHeaderBinding
 import com.azercell.myazercell.transfers.databinding.CardTypeSelectorItemBinding
 
-class CardListAdapter(private val context: Context, private val algorithmList: List<Card>) : ArrayAdapter<Card>(context, 0, algorithmList) {
+class CardListAdapter(private val context: Context, private val cardsList: ArrayList<Card?>) : ArrayAdapter<Card?>(context, 0, cardsList) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return if (position == 0) {
             CardSelectorHeaderBinding.inflate(LayoutInflater.from(context), parent, false)
         } else {
             val binding = CardTypeSelectorItemBinding.inflate(LayoutInflater.from(context), parent, false)
-            getItem(position)?.let { country ->
-                setCardInfo(binding, country)
+            getItem(position)?.let { card ->
+                setCardInfo(binding, card)
             }
             binding
         }.root
@@ -35,8 +35,8 @@ class CardListAdapter(private val context: Context, private val algorithmList: L
             CardSelectorHeaderBinding.inflate(LayoutInflater.from(context), parent, false)
         } else {
             val binding = CardTypeSelectorItemBinding.inflate(LayoutInflater.from(context), parent, false)
-            getItem(position)?.let { country ->
-                setCardInfo(binding, country)
+            getItem(position)?.let { card ->
+                setCardInfo(binding, card)
             }
             binding
         }.root
@@ -46,6 +46,6 @@ class CardListAdapter(private val context: Context, private val algorithmList: L
         if (position == 0) {
             return null
         }
-        return super.getItem(position - 1)
+        return super.getItem(position)
     }
 }

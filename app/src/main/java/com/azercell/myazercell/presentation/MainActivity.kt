@@ -32,6 +32,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding, MainContra
     private val config: AppBarConfiguration by lazy {
         AppBarConfiguration.Builder(
             setOf(
+                com.azercell.myazercell.auth.R.id.registrationFragment,
                 com.azercell.myazercell.home.R.id.homeFragment,
                 com.azercell.myazercell.transfers.R.id.transfersFragment,
                 com.azercell.myazercell.others.R.id.othersFragment,
@@ -69,6 +70,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding, MainContra
         val navBuilder = NavOptions.Builder()
         val navOptions: NavOptions = navBuilder.setPopUpTo(R.id.main_nav_graph, false).build()
         findNavController(R.id.main_nav_fragment).navigate(com.azercell.myazercell.home.R.id.home_nav_graph, bundleOf(AUTH_TOKEN_BUNDLE to authToken), navOptions)
+    }
+
+    override fun onLogout() {
+        val navBuilder = NavOptions.Builder()
+        val navOptions: NavOptions = navBuilder.setPopUpTo(R.id.main_nav_graph, false).build()
+        findNavController(R.id.main_nav_fragment).navigate(com.azercell.myazercell.auth.R.id.auth_nav_graph, null, navOptions)
     }
 
     override fun onToolbarChange(toolbar: Toolbar) {

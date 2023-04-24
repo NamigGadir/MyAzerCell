@@ -14,4 +14,8 @@ class AuthRepositoryImpl @Inject constructor() : AuthRepository {
     override suspend fun getCurrentUser(authToken: String): RegisterRequest? {
         return UserDataController.getUserInfo(authToken)
     }
+
+    override suspend fun logout(authToken: String) {
+        return UserDataController.logout(authToken)
+    }
 }

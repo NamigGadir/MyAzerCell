@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.azercell.myazercell.core.base.BaseFragment
 import com.azercell.myazercell.core.extensions.toast
 import com.azercell.myazercell.home.databinding.FragmentOrderCardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OrderCardFragment : BaseFragment<OrderCardViewModel, FragmentOrderCardBinding, OrderCardContract.OrderCardState, OrderCardContract.OrderCardEffect, OrderCardContract.OrderCardEvent>(),
     AdapterView.OnItemSelectedListener {
 

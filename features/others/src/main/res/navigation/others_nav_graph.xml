@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/othersFragment"
         android:name="com.azercell.myazercell.others.OthersFragment"
-        android:label="fragment_others"
+        android:label="@string/others"
         tools:layout="@layout/fragment_others" />
 </navigation>

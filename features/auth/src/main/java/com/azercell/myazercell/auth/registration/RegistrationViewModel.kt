@@ -5,8 +5,13 @@ import com.azercell.myazercell.core.base.UIEffect
 import com.azercell.myazercell.core.base.UIEvent
 import com.azercell.myazercell.core.base.UIState
 import com.azercell.myazercell.core.util.Constants
+import com.azercell.myazercell.core.util.SessionManager
+import com.azercell.myazercell.domain.entity.enum.CardCurrency
+import com.azercell.myazercell.domain.entity.enum.CardNetwork
 import com.azercell.myazercell.domain.entity.remote.auth.RegisterRequest
+import com.azercell.myazercell.domain.entity.remote.home.CardOrderRequest
 import com.azercell.myazercell.domain.usecase.auth.RegisterUseCase
+import com.azercell.myazercell.domain.usecase.home.OrderCardUseCase
 import com.azercell.myazercell.domain.validators.PhoneNumberValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val phoneNumberValidator: PhoneNumberValidator,
-    private val registerUseCase: RegisterUseCase
+    private val registerUseCase: RegisterUseCase,
+    private val orderCardUseCase: OrderCardUseCase
 ) : BaseViewModel<RegistrationContract.RegistrationState, RegistrationContract.RegistrationEffect, RegistrationContract.RegistrationEvent>() {
     override fun setInitialState() = RegistrationContract.RegistrationState(false)
 
@@ -31,6 +37,17 @@ class RegistrationViewModel @Inject constructor(
                 event.name, event.surname, event.birth, Constants.NUMBER_PREFIX_AZ + event.phoneNumber
             )
         ) {
+            orderCardUseCase.invokeRequest(
+                OrderCardUseCase.Params(
+                    it.authToken,
+                    CardOrderRequest(
+                        event.surname + event.name,
+                        CardNetwork.MC,
+                        CardCurrency.AZN
+                    )
+                )
+            )
+            SessionManager.currentToken = it.authToken
             postEffect {
                 RegistrationContract.RegistrationEffect.OnRegisterSuccess(it.authToken)
             }

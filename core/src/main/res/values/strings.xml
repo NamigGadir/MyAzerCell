@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button_ok">Ok</string>
+    <string name="unknown_error">Gözlənilməz xəta baş verdi</string>
+    <string name="are_you_sure">Are you sure?</string>
+</resources>
